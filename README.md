@@ -7,3 +7,9 @@
 本スクリプトの利用には、以下ハードウェアの作成が必要です。
 
 [NintendoSwitchをPCから操作する - おいら屋ファクトリー](https://blog.feelmy.net/control-nintendo-switch-from-computer/)
+
+また、python環境に pyserial のインストールが必要です。
+
+```
+pip install pyserial
+```
