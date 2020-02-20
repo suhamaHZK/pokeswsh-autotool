@@ -213,6 +213,7 @@ def wizard():
         if cmdstr == 'reset' or cmdstr == 'r':
             totalcount = 0
             continue
+        if cmdstr == '': continue
         if not cmdstr.isdecimal(): break
         count = int(cmdstr)
         if count < 1: break
