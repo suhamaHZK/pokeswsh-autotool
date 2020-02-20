@@ -28,6 +28,7 @@ def setcount(today):
     return count
 
 def macro(today,count):
+    commit_rate = 100
 
     # First Link
     send('Button R', 0.1)
@@ -78,6 +79,49 @@ def macro(today,count):
         sleep(0.1)
         send('Button A', 0.1)
         sleep(0.3)
+
+        # commit_rate 回ごとに、一旦ゲームに戻る
+        if (i+1)%commit_rate == 0:
+            # ゲームに戻る
+            sleep(0.2)
+            send('Button HOME', 0.1)
+            sleep(1.5)
+            send('Button HOME', 0.1)
+            sleep(3)
+
+            # 設定を開く
+            send('Button HOME', 0.1)
+            sleep(1)
+            send('HAT BOTTOM', 0.1)
+            send('HAT CENTER', 0.1)
+            send('HAT RIGHT', 0.1)
+            send('HAT CENTER', 0.1)
+            send('HAT RIGHT', 0.1)
+            send('HAT CENTER', 0.1)
+            send('HAT RIGHT', 0.1)
+            send('HAT CENTER', 0.1)
+            send('HAT RIGHT', 0.1)
+            send('HAT CENTER', 0.1)
+            send('Button A', 0.1)
+            sleep(1.5)
+
+            # 本体 > 日付と時刻 を選ぶ
+            for j in range(14):
+                send('HAT BOTTOM', 0.1)
+                send('HAT CENTER', 0.1)
+            send('HAT RIGHT', 0.1)
+            send('HAT CENTER', 0.5)
+            for j in range(4):
+                send('HAT BOTTOM', 0.1)
+                send('HAT CENTER', 0.1)
+            send('Button A', 0.1)
+            sleep(1)
+
+            # 日時変更を選択する
+            for j in range(2):
+                send('HAT BOTTOM', 0.1)
+                send('HAT CENTER', 0.1)
+
         # increase date
         today = tomorrow
     print('========================')
