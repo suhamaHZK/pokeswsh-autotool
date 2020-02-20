@@ -122,6 +122,15 @@ def macro(today,count):
                 send('HAT BOTTOM', 0.1)
                 send('HAT CENTER', 0.1)
 
+            # カーソルを右端に合わせる
+            send('Button A', 0.1)
+            sleep(0.3)
+            for i in range(5):
+                send('HAT RIGHT', 0.1)
+                send('HAT CENTER', 0.1)
+            send('Button A', 0.1)
+            sleep(0.3)
+
         # increase date
         today = tomorrow
     print('========================')
