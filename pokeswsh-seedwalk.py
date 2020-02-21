@@ -7,7 +7,7 @@ def setcount(today):
     print('◆ 使い方 ◆')
     print('1. 「インターネットで時刻をあわせる」を一旦ONにしたあと、OFFにしてください。')
     print('2. 作業中に日付をまたがないよう、時刻を 0:00 に設定してください。')
-    print('3. レート戦を1戦行ってください。(YY通信による方法でもOKのはず)')
+    print('3. レート戦またはYY通信対戦で、高速消費を有効にしてください。')
     print('4. ソフトをインターネットから切断してください。')
     print('5. 「現在の日付と時刻」にカーソルを合わせてください。')
     print('   (Aボタンはまだ押さないでください)')
@@ -28,6 +28,11 @@ def setcount(today):
     return count
 
 def macro(today,count):
+    # マクロの速度(適宜調整してください)
+    # default: 0.1
+    ui_wait = 0.1
+
+    # ゲームに戻る頻度(100なら、時刻変更100回ごとに一旦ゲームに戻る)
     commit_rate = 100
 
     # First Link
@@ -50,10 +55,9 @@ def macro(today,count):
         print('============')
         print(i+1, '/', count, today)
 
-        ui_wait = 0.1
         # 日付を変更
-        send('Button A', 0.1)
-        sleep(0.3)
+        send('Button A', ui_wait)
+        sleep(ui_wait*3)
         for j in range(3): # 左を3回押して 日 を選択
             send('HAT LEFT', ui_wait)
             send('HAT CENTER', ui_wait)
@@ -76,60 +80,60 @@ def macro(today,count):
         for j in range(3):
             send('HAT RIGHT', ui_wait)
             send('HAT CENTER', ui_wait)
-        sleep(0.1)
-        send('Button A', 0.1)
-        sleep(0.3)
+        sleep(ui_wait)
+        send('Button A', ui_wait)
+        sleep(ui_wait*3)
 
         # commit_rate 回ごとに、一旦ゲームに戻る
         if (i+1)%commit_rate == 0:
             # ゲームに戻る
-            sleep(0.2)
-            send('Button HOME', 0.1)
-            sleep(1.5)
-            send('Button HOME', 0.1)
-            sleep(3)
+            sleep(ui_wait*2)
+            send('Button HOME', ui_wait)
+            sleep(ui_wait*15)
+            send('Button HOME', ui_wait)
+            sleep(ui_wait*30)
 
             # 設定を開く
-            send('Button HOME', 0.1)
-            sleep(1)
-            send('HAT BOTTOM', 0.1)
-            send('HAT CENTER', 0.1)
-            send('HAT RIGHT', 0.1)
-            send('HAT CENTER', 0.1)
-            send('HAT RIGHT', 0.1)
-            send('HAT CENTER', 0.1)
-            send('HAT RIGHT', 0.1)
-            send('HAT CENTER', 0.1)
-            send('HAT RIGHT', 0.1)
-            send('HAT CENTER', 0.1)
-            send('Button A', 0.1)
-            sleep(1.5)
+            send('Button HOME', ui_wait)
+            sleep(ui_wait*10)
+            send('HAT BOTTOM', ui_wait)
+            send('HAT CENTER', ui_wait)
+            send('HAT RIGHT', ui_wait)
+            send('HAT CENTER', ui_wait)
+            send('HAT RIGHT', ui_wait)
+            send('HAT CENTER', ui_wait)
+            send('HAT RIGHT', ui_wait)
+            send('HAT CENTER', ui_wait)
+            send('HAT RIGHT', ui_wait)
+            send('HAT CENTER', ui_wait)
+            send('Button A', ui_wait)
+            sleep(ui_wait*15)
 
             # 本体 > 日付と時刻 を選ぶ
             for j in range(14):
-                send('HAT BOTTOM', 0.1)
-                send('HAT CENTER', 0.1)
-            send('HAT RIGHT', 0.1)
-            send('HAT CENTER', 0.5)
+                send('HAT BOTTOM', ui_wait)
+                send('HAT CENTER', ui_wait)
+            send('HAT RIGHT', ui_wait)
+            send('HAT CENTER', ui_wait*5)
             for j in range(4):
-                send('HAT BOTTOM', 0.1)
-                send('HAT CENTER', 0.1)
-            send('Button A', 0.1)
-            sleep(1)
+                send('HAT BOTTOM', ui_wait)
+                send('HAT CENTER', ui_wait)
+            send('Button A', ui_wait)
+            sleep(ui_wait*10)
 
             # 日時変更を選択する
             for j in range(2):
-                send('HAT BOTTOM', 0.1)
-                send('HAT CENTER', 0.1)
+                send('HAT BOTTOM', ui_wait)
+                send('HAT CENTER', ui_wait)
 
             # カーソルを右端に合わせる
-            send('Button A', 0.1)
-            sleep(0.3)
+            send('Button A', ui_wait)
+            sleep(ui_wait*3)
             for i in range(5):
-                send('HAT RIGHT', 0.1)
-                send('HAT CENTER', 0.1)
-            send('Button A', 0.1)
-            sleep(0.3)
+                send('HAT RIGHT', ui_wait)
+                send('HAT CENTER', ui_wait)
+            send('Button A', ui_wait)
+            sleep(ui_wait*3)
 
         # increase date
         today = tomorrow
